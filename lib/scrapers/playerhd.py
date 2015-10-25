@@ -5,22 +5,21 @@ import urlparse
 
 encoding="utf-8"
 
-def run(domain,id,width="700",height="480"):
+def run(domain,id,ref,width="700",height="480"):
 	type="rtmp"
 	#provides: http://www.hdmyt.info, http://www.playerhd(n).pw
 	r_pageurl="http://%s/channel.php?file=%s&width=%s&height=%s&autostart=true"%(domain,id,width,height)
 	#loop through endless domains and player/channel pages until you find embed code
 	while True:
-		page=bt.get_page(r_pageurl,encoding)
+		page=bt.get_page(r_pageurl,encoding,referer=ref)
 		pageurl=re.findall('iframe src="(.*?)"',page)
-		print pageurl
 		if len(pageurl)>0:
 			r_pageurl=pageurl[0]
 		else:
 			r_pageurl=re.findall('<script type="text/javascript" src="(.*?channel\.php.*?)"',page)[0]
 		if "embed.php?" in r_pageurl:
 			break
-	page=bt.get_page(r_pageurl,encoding)
+	page=bt.get_page(r_pageurl,encoding,referer=ref)
 	#script=urllib.unquote(re.findall("unescape\('(.*?)'\)",page)[0])
 	sx1=re.findall('id="ssx1" value="(.*?)"',page)[0].decode("base64")
 	sx4=re.findall('id="ssx4" value="(.*?)"',page)[0].decode("base64")

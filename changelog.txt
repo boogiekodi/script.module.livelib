@@ -1,5 +1,7 @@
+2015-11-23: version bump
+2015-11-22: 0.0.2 Version Release
 2015-11-22: weplayer,sostart
 2015-10-25: 0.0.1 Version Release
 2015-10-25: playerhd: use refferers
 2015-10-19: initial
-2015-10-19: Initial commit 
+2015-10-19: Initial commit

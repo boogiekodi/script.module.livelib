@@ -67,7 +67,7 @@ class livelib():
 	
 	def _escape_rtmp(self,s):
 		s=str(s)
-		escaped=[" ","?"]
+		escaped=[" ","?","&"]
 		for c in escaped:
 			if c in s:
 				s=s.replace(c,"\\%s"%hex(ord(c))[2:])

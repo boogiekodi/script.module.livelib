@@ -5,7 +5,7 @@ import urllib
 
 encoding="utf-8"
 
-def run(channel,e,script,referer,width="480",height="270"):
+def run(channel,e,script,referer,lb=None,width="480",height="270"):
 	# provides janjua.tv, p3gtv and friends
 	type="rtmp"
 	page=bt.get_page(script,encoding)
@@ -19,7 +19,10 @@ def run(channel,e,script,referer,width="480",height="270"):
 	pk=flashvars["pk"][0]
 	r_flashver="WIN 19,0,0,232"
 	r_swfurl="%s%s"%(vidserver,re.findall('SWFObject\("(.*?)"',page)[0])
-	r_server='%s:1935/loadbalancer?%s'%(vidserver,vidid)
+	if lb:
+		r_server="%s/loadbalancer?%s"%(lb,vidid)
+	else:
+		r_server='%s:1935/loadbalancer?%s'%(vidserver,vidid)
 	r_server=bt.get_page(r_server,encoding).split("=")[1]
 	r_tcurl="rtmp://%s/live"%r_server
 	r_playpath="%s?id=%s&pk=%s"%(s,vidid,pk)
